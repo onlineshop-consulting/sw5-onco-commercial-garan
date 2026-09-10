@@ -36,7 +36,16 @@ zur Verfügung. In diesem Fall verwendet das Gerät automatisch eine ähnliche
 Standardschrift. Das Label bleibt vollständig lesbar, einzelne Zahlen und
 Texte können dann nur minimal anders aussehen.
 
+## Installation
+
+1. ZIP herunterladen: https://github.com/onlineshop-consulting/sw5-onco-commercial-garan/releases
+2. Im Shopware-Backend unter **Einstellungen > Plugin-Manager** installieren und aktivieren
+3. Cache leeren und Theme neu kompilieren
+
 ## Konfiguration
+
+Die Konfiguration wird in diesem Video erklärt:
+https://onlineshop.consulting/videos/plugins/sw5/onco-commercial-garan.mp4
 
 **Modellkennung** ("Model identifier" im Label): dreistufige Prioritätenliste
 aus Artikelnummer, Herstellerartikelnummer und EAN – der erste am Artikel
@@ -46,15 +55,6 @@ EAN).
 **Pflege pro Artikel** unter **Freitextfelder**: "EU GARAN: Garantiedauer in
 Jahren" ausfüllen (leer = kein Label). Optional "EU GARAN: Eigenes Label"
 zum Übersteuern des generierten Labels. Felder sind pro Variante möglich.
-
-## Installation
-
-1. ZIP herunterladen: https://github.com/onlineshop-consulting/sw5-onco-commercial-garan/releases
-2. Im Shopware-Backend unter **Einstellungen > Plugin-Manager** installieren und aktivieren
-3. Cache leeren und Theme neu kompilieren
-
-Bei der Deinstallation werden die Freitextfelder entfernt (außer bei
-"Daten behalten").
 
 ## Kompatibilität
 

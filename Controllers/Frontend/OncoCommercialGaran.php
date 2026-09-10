@@ -1,5 +1,9 @@
 <?php
 
+// No namespace: legacy Shopware 5 controllers registered via the
+// ControllerPath event must live in the global namespace, otherwise the
+// dispatcher's proxy factory cannot find the class.
+
 use OncoCommercialGaran\Services\LabelService;
 
 class Shopware_Controllers_Frontend_OncoCommercialGaran extends Enlight_Controller_Action

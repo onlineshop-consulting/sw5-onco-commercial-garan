@@ -160,8 +160,6 @@ class OncoCommercialGaran extends Plugin
     {
         $this->getLifeCycleService()->install();
 
-        $context->scheduleClearCache(self::CACHE_LIST);
-
         parent::install($context);
     }
 
@@ -169,8 +167,6 @@ class OncoCommercialGaran extends Plugin
     public function uninstall(UninstallContext $context)
     {
         $this->getLifeCycleService()->uninstall($context->keepUserData());
-
-        $context->scheduleClearCache(self::CACHE_LIST);
 
         parent::uninstall($context);
     }
