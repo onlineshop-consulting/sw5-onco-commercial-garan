@@ -1,0 +1,49 @@
+// Inter (variable font, SIL OFL) for the label's editable fields: the SVG
+// styles declare "Inter-ExtraBold, Inter" etc. and pick the weight via
+// font-variation-settings, so one variable @font-face covers all cuts.
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/inter-variable-latin.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+.onco-commercial-garan--container {
+    margin: 10px 0;
+}
+
+.onco-commercial-garan--nested {
+    display: inline-block;
+    line-height: 0;
+
+    svg {
+        width: 180px;
+        height: auto;
+        border: 1px solid #dadae5;
+    }
+}
+
+// Compact variant inside listing product boxes
+.product--box .onco-commercial-garan--nested svg {
+    width: 130px;
+}
+
+.onco-commercial-garan--modal {
+    .onco-commercial-garan--modal-content {
+        max-width: 560px;
+        padding: 10px;
+    }
+
+    .onco-commercial-garan--label-image {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .onco-commercial-garan--portal-link {
+        margin-top: 10px;
+        text-align: center;
+    }
+}

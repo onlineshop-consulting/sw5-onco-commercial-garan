@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware5/shopware/5.7/engine/Shopware/Components/Plugin/schema/plugin.xsd">
+
+    <label>EU producer's guarantee (GARAN)</label>
+    <label lang="de">EU-Herstellergarantie (GARAN)</label>
+
+    <version>0.1.0</version>
+
+    <copyright>onlineshop.consulting</copyright>
+    <author>onlineshop.consulting</author>
+    <link>https://onlineshop.consulting</link>
+
+    <description>
+        Displays the EU GARAN label for the producer's commercial guarantee of durability per product (Directive (EU) 2024/825): nested label on the product detail page, checkout confirmation and listing (when the buy button is shown); the full producer label opens on first click.
+    </description>
+    <description lang="de">
+        Zeigt das EU-GARAN-Label für die Haltbarkeitsgarantie des Herstellers pro Produkt (Richtlinie (EU) 2024/825): Nested Label auf Produktdetailseite, Bestellabschluss und im Listing (wenn der Kaufen-Button aktiv ist); das vollständige Hersteller-Label öffnet sich beim ersten Klick.
+    </description>
+
+    <compatibility minVersion="5.4.0"/>
+
+    <changelog version="1.0.0">
+        <changes>Initial release</changes>
+        <changes lang="de">Erstveröffentlichung</changes>
+    </changelog>
+</plugin>

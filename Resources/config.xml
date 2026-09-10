@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware5/shopware/5.7/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+        <element type="select">
+            <name>identifierPriority1</name>
+            <label>Model identifier priority 1</label>
+            <label lang="de">Modellkennung Priorität 1</label>
+            <value>ordernumber</value>
+            <store>
+                <option>
+                    <value>ordernumber</value>
+                    <label>Product number</label>
+                    <label lang="de">Artikelnummer</label>
+                </option>
+                <option>
+                    <value>suppliernumber</value>
+                    <label>Supplier product number</label>
+                    <label lang="de">Herstellerartikelnummer</label>
+                </option>
+                <option>
+                    <value>ean</value>
+                    <label>EAN</label>
+                    <label lang="de">EAN</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select">
+            <name>identifierPriority2</name>
+            <label>Model identifier priority 2</label>
+            <label lang="de">Modellkennung Priorität 2</label>
+            <value>suppliernumber</value>
+            <store>
+                <option>
+                    <value>ordernumber</value>
+                    <label>Product number</label>
+                    <label lang="de">Artikelnummer</label>
+                </option>
+                <option>
+                    <value>suppliernumber</value>
+                    <label>Supplier product number</label>
+                    <label lang="de">Herstellerartikelnummer</label>
+                </option>
+                <option>
+                    <value>ean</value>
+                    <label>EAN</label>
+                    <label lang="de">EAN</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select">
+            <name>identifierPriority3</name>
+            <label>Model identifier priority 3</label>
+            <label lang="de">Modellkennung Priorität 3</label>
+            <value>ean</value>
+            <store>
+                <option>
+                    <value>ordernumber</value>
+                    <label>Product number</label>
+                    <label lang="de">Artikelnummer</label>
+                </option>
+                <option>
+                    <value>suppliernumber</value>
+                    <label>Supplier product number</label>
+                    <label lang="de">Herstellerartikelnummer</label>
+                </option>
+                <option>
+                    <value>ean</value>
+                    <label>EAN</label>
+                    <label lang="de">EAN</label>
+                </option>
+            </store>
+        </element>
+
+    </elements>
+</config>
