@@ -29,7 +29,7 @@
         var portal = document.createElement('a');
         portal.href = link.href;
         portal.target = '_blank';
-        portal.rel = 'noopener';
+        portal.rel = 'nofollow noopener';
         portal.appendChild(
             document.createTextNode(link.getAttribute('data-portal-label') || link.href)
         );
