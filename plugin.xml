@@ -5,7 +5,7 @@
     <label>EU producer's guarantee (GARAN)</label>
     <label lang="de">EU-Herstellergarantie (GARAN)</label>
 
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <copyright>onlineshop.consulting</copyright>
     <author>onlineshop.consulting</author>
@@ -23,5 +23,13 @@
     <changelog version="1.0.0">
         <changes>Initial release</changes>
         <changes lang="de">Erstveröffentlichung</changes>
+    </changelog>
+    <changelog version="1.0.1">
+        <changes>nofollow for external links</changes>
+        <changes lang="de">nofollow für externe Links</changes>
+    </changelog>
+    <changelog version="1.0.2">
+        <changes>label modal mispositioned on first click, improved registration of template</changes>
+        <changes lang="de">Label-Modal beim ersten Klick falsch positioniert, bessere Template-Registrierung</changes>
     </changelog>
 </plugin>

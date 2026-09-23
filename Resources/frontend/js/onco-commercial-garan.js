@@ -16,8 +16,13 @@
 
         var image = document.createElement('img');
         image.className = 'onco-commercial-garan--label-image';
-        image.src = link.getAttribute('data-label-src');
         image.alt = link.getAttribute('data-modal-title') || '';
+        image.onload = function () {
+            if (document.body.contains(image) && window.jQuery && window.jQuery.modal) {
+                window.jQuery.modal.center();
+            }
+        };
+        image.src = link.getAttribute('data-label-src');
         content.appendChild(image);
 
         var paragraph = document.createElement('p');

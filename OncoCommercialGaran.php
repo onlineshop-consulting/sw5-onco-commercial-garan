@@ -36,6 +36,7 @@ class OncoCommercialGaran extends Plugin
     public static function getSubscribedEvents()
     {
         return [
+            'Enlight_Controller_Action_PreDispatch' => 'onPreDispatch',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail' => 'onDetailPostDispatch',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Listing' => 'onListingPostDispatch',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Search' => 'onSearchPostDispatch',
@@ -103,6 +104,14 @@ class OncoCommercialGaran extends Plugin
     public function onGetFrontendController()
     {
         return $this->getPath() . '/Controllers/Frontend/OncoCommercialGaran.php';
+    }
+
+    /**
+     * @return void
+     */
+    public function onPreDispatch(Enlight_Controller_ActionEventArgs $args)
+    {
+        $args->getSubject()->View()->addTemplateDir($this->getPath() . '/Resources/views');
     }
 
     /** @return void */
@@ -210,8 +219,6 @@ class OncoCommercialGaran extends Plugin
     /** @return void */
     private function assignLabelData(\Enlight_View_Default $view, array $orderNumbers)
     {
-        $view->addTemplateDir($this->getPath() . '/Resources/views');
-
         $view->assign('oncoCommercialGaran', [
             'map' => $this->buildLabelMap($orderNumbers),
             'portalUrl' => self::PORTAL_URL,
