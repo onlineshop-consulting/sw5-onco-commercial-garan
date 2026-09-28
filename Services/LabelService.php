@@ -28,6 +28,9 @@ class LabelService
     /** @var Shop|null */
     private $shop;
 
+    /** @var array<string, mixed>|null */
+    private $config;
+
     public function __construct(
         Connection            $connection,
         DBALConfigReader      $configReader,
@@ -89,14 +92,26 @@ class LabelService
             return null;
         }
 
+        // With the inherit option the main variant's fields act as
+        // fallback for variants without own values.
+        $config = $this->getConfig();
+        if (!empty($config['inheritMainVariant'])) {
+            $yearsExpression = "COALESCE(NULLIF(attr.onco_commercial_garan_years, ''), NULLIF(mattr.onco_commercial_garan_years, ''))";
+            $mediaExpression = 'COALESCE(attr.onco_commercial_garan_media_id, mattr.onco_commercial_garan_media_id)';
+        } else {
+            $yearsExpression = "NULLIF(attr.onco_commercial_garan_years, '')";
+            $mediaExpression = 'attr.onco_commercial_garan_media_id';
+        }
+
         $row = $this->connection->fetchAssoc(
             'SELECT d.ordernumber, d.suppliernumber, d.ean,
-                    attr.onco_commercial_garan_years AS years,
-                    attr.onco_commercial_garan_media_id AS mediaId,
+                    ' . $yearsExpression . ' AS years,
+                    ' . $mediaExpression . ' AS mediaId,
                     s.name AS brand
              FROM s_articles_details d
-             INNER JOIN s_articles_attributes attr ON attr.articledetailsID = d.id
              INNER JOIN s_articles a ON a.id = d.articleID
+             LEFT JOIN s_articles_attributes attr ON attr.articledetailsID = d.id
+             LEFT JOIN s_articles_attributes mattr ON mattr.articledetailsID = a.main_detail_id
              LEFT JOIN s_articles_supplier s ON s.id = a.supplierID
              WHERE d.ordernumber = ?',
             [$number]
@@ -141,7 +156,7 @@ class LabelService
      */
     private function resolveIdentifier(array $data)
     {
-        $config = $this->configReader->getByPluginName('OncoCommercialGaran', $this->shop);
+        $config = $this->getConfig();
 
         $priorities = [
             isset($config['identifierPriority1']) ? $config['identifierPriority1'] : 'ordernumber',
@@ -191,6 +206,16 @@ class LabelService
             'mime' => isset($mimeTypes[$extension]) ? $mimeTypes[$extension] : 'application/octet-stream',
             'filename' => 'EU-GARAN-Label-' . $number . ($extension !== '' ? '.' . $extension : ''),
         ];
+    }
+
+    /** @return array<string, mixed> */
+    private function getConfig()
+    {
+        if ($this->config === null) {
+            $this->config = $this->configReader->getByPluginName('OncoCommercialGaran', $this->shop);
+        }
+
+        return $this->config;
     }
 
     /** @return string */

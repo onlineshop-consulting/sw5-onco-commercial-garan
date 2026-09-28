@@ -39,6 +39,7 @@ class OncoCommercialGaran extends Plugin
             'Enlight_Controller_Action_PreDispatch' => 'onPreDispatch',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail' => 'onDetailPostDispatch',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Listing' => 'onListingPostDispatch',
+            'Enlight_Controller_Action_PostDispatchSecure_Widgets_Listing' => 'onListingPostDispatch',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Search' => 'onSearchPostDispatch',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Checkout' => 'onCheckoutPostDispatch',
             'Enlight_Controller_Dispatcher_ControllerPath_Frontend_OncoCommercialGaran' => 'onGetFrontendController',
@@ -242,13 +243,25 @@ class OncoCommercialGaran extends Plugin
         /** @var \Doctrine\DBAL\Connection $connection */
         $connection = $this->container->get('dbal_connection');
 
+        // With the inherit option the main variant's fields act as
+        // fallback for variants without own values.
+        $config = $this->readConfig();
+        if (!empty($config['inheritMainVariant'])) {
+            $yearsExpression = 'COALESCE(NULLIF(a.' . self::ATTR_YEARS . ", ''), NULLIF(ma." . self::ATTR_YEARS . ", ''))";
+            $mediaExpression = 'COALESCE(a.' . self::ATTR_MEDIA . ', ma.' . self::ATTR_MEDIA . ')';
+        } else {
+            $yearsExpression = 'NULLIF(a.' . self::ATTR_YEARS . ", '')";
+            $mediaExpression = 'a.' . self::ATTR_MEDIA;
+        }
+
         $rows = $connection->fetchAll(
-            'SELECT d.ordernumber, a.' . self::ATTR_YEARS . ' AS years, a.' . self::ATTR_MEDIA . ' AS mediaId
+            'SELECT d.ordernumber, ' . $yearsExpression . ' AS years, ' . $mediaExpression . ' AS mediaId
              FROM s_articles_details d
-             INNER JOIN s_articles_attributes a ON a.articledetailsID = d.id
+             INNER JOIN s_articles art ON art.id = d.articleID
+             LEFT JOIN s_articles_attributes a ON a.articledetailsID = d.id
+             LEFT JOIN s_articles_attributes ma ON ma.articledetailsID = art.main_detail_id
              WHERE d.ordernumber IN (?)
-               AND a.' . self::ATTR_YEARS . " IS NOT NULL
-               AND a." . self::ATTR_YEARS . " != ''",
+             HAVING years IS NOT NULL',
             [$orderNumbers],
             [\Doctrine\DBAL\Connection::PARAM_STR_ARRAY]
         );
@@ -291,6 +304,19 @@ class OncoCommercialGaran extends Plugin
         }
 
         return $map;
+    }
+
+    /** @return array<string, mixed> */
+    private function readConfig()
+    {
+        /** @var \Shopware\Components\Plugin\DBALConfigReader $reader */
+        $reader = $this->container->get('shopware.plugin.config_reader');
+
+        $shop = $this->container->initialized('shop')
+            ? $this->container->get('shop')
+            : null;
+
+        return $reader->getByPluginName($this->getName(), $shop);
     }
 
     /** @return LabelService */

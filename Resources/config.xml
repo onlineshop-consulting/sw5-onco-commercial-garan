@@ -2,6 +2,14 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware5/shopware/5.7/engine/Shopware/Components/Plugin/schema/config.xsd">
     <elements>
+        <element scope="shop" type="boolean">
+            <name>inheritMainVariant</name>
+            <label>Apply main variant's guarantee fields to all variants</label>
+            <label lang="de">Garantie-Felder der Hauptvariante für alle Varianten übernehmen</label>
+            <description>Variants without own values use the guarantee duration and label override of the main variant. Values maintained on a variant still take precedence.</description>
+            <description lang="de">Varianten ohne eigene Werte übernehmen Garantiedauer und Label-Override der Hauptvariante. An einer Variante gepflegte Werte haben weiterhin Vorrang.</description>
+        </element>
+
         <element type="select">
             <name>identifierPriority1</name>
             <label>Model identifier priority 1</label>

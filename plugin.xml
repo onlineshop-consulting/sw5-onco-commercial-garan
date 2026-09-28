@@ -5,7 +5,7 @@
     <label>EU producer's guarantee (GARAN)</label>
     <label lang="de">EU-Herstellergarantie (GARAN)</label>
 
-    <version>1.0.2</version>
+    <version>1.1.0</version>
 
     <copyright>onlineshop.consulting</copyright>
     <author>onlineshop.consulting</author>
@@ -31,5 +31,9 @@
     <changelog version="1.0.2">
         <changes>label modal mispositioned on first click, improved registration of template</changes>
         <changes lang="de">Label-Modal beim ersten Klick falsch positioniert, bessere Template-Registrierung</changes>
+    </changelog>
+    <changelog version="1.1.0">
+        <changes>add labels to products loaded via infinite scrolling, optionally apply the main variant's fields to all variants</changes>
+        <changes lang="de">Label bei per Infinite Scrolling nachgeladenen Artikeln; optional Garantie-Felder der Hauptvariante für alle Varianten übernehmen</changes>
     </changelog>
 </plugin>
